@@ -1,6 +1,34 @@
+<script>
+    import { onMount } from "svelte";
+    import { fade, fly } from 'svelte/transition';
+    let menuOpen = false;
+    let isMobile = false;
+    let windowWidth;
+
+    onMount(() => {
+        handleResize();
+    });
+
+    function handleResize(){
+        if(windowWidth >= 768) {
+            menuOpen = false;
+            isMobile = false;
+        } else {
+            isMobile = true;
+        }
+        console.log("width"+windowWidth);
+    }
+
+    function toggleMenu() {
+        menuOpen = !menuOpen;
+    }
+</script>
+
+<svelte:window on:resize={handleResize} bind:innerWidth={windowWidth}/>
+
 <nav>
     <a href="/" class="logo">Mattis Henner <span>Portfolio</span></a>
-    <ul>
+    <ul class={isMobile && menuOpen ? "open" : ""}>
         <li><a href="/om">Om mig</a></li>
         <li><a href="">Kontakt</a></li>
         <li>
@@ -11,15 +39,39 @@
             </ul>
         </li>
     </ul>
+    <div class="menu-icon" on:click={toggleMenu}>
+        <div class="placeholder">Menu</div>
+        {#if menuOpen}
+            <div class="ghost" transition:fly="{{y: -20, duration: 200}}">Close</div>
+        {:else}
+            <div class="ghost" transition:fly="{{y: 20, duration: 200}}">Menu</div>
+        {/if}
+        
+    </div>
 </nav>
 
 <style>
+    .placeholder {
+        visibility: hidden;
+    }
+    .ghost {
+        position: absolute;
+        top: 0;
+        left: 0%;
+    }
+    .menu-icon {
+        display: none;
+        position: relative;
+    }
     nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 5px var(--margin);
         font-weight: 500;
+        position: sticky;
+        top: 0;
+        z-index: 900;
     }
 
     nav ul {
@@ -87,5 +139,37 @@
     nav ul:not(.nested) > li > a:hover:after,
     .logo:hover:after {
         width: 1.5em;
+    }
+
+    @media only screen and (max-width: 768px) {
+        nav {
+            padding: 20px var(--margin);
+        }
+        .menu-icon {
+            display: block;
+            cursor: pointer;
+            z-index: 999;
+        }
+        nav > ul {
+            flex-direction: column;
+            background-color: var(--white);
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            margin: 0;
+            min-height: 50dvh;
+            justify-content: center;
+            z-index: 998;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+            transform: translateY(-100%);
+            transition: all 0.2s ease-out;
+        }
+        nav > ul.open {
+            transform: translateY(0%);
+        }
+        nav > ul > li {
+            margin: 20px;
+        }
     }
 </style>

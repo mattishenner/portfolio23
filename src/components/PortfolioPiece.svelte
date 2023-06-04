@@ -1,5 +1,6 @@
 <script>
     import { onMount } from "svelte";
+    import { afterUpdate } from "svelte";
 
     // Props
     export let title = "Portfolio Piece";
@@ -8,15 +9,19 @@
     export let number = "01";
     export let color = "BFC195";
 
-    let speed = 0.4;
+    let speed = 0.15;
     let initialPos;
     let imgElement;
     let imgHeight;
     let division = 3;
+    let offset = -500;
 
     onMount(() => {
         handleResize();
         window.addEventListener("resize", handleResize);
+        window.setTimeout(() => {
+            handleResize();
+        }, 20);
 
         //Create a media query
         const mediaQuery = window.matchMedia("(max-width: 700px)");
@@ -30,20 +35,24 @@
     });
     function handleMediaQueryChange(mediaQuery) {
         if (mediaQuery.matches) {
-            // If the media query matches (screen width less than 700px), reduce speed
-            speed = 0.15;
+            // If the media query matches (screen width less than 700px)
             division = 3;
+            offset = 100;
+            speed = 0.1;
         } else {
-            // If not, set speed back to 0.3
-            speed = 0.4;
-            division = 3;
+            // If not
+            division = 5;
+            offset = -500;
         }
     }
+
+    afterUpdate(() => {
+        handleResize();
+    });
 
     function handleResize() {
         initialPos = imgElement.getBoundingClientRect().top + window.scrollY;
         imgHeight = imgElement.getBoundingClientRect().height;
-        console.log(imgHeight);
     }
 </script>
 
@@ -54,7 +63,7 @@
                 bind:this={imgElement}
                 src={image}
                 alt="Banner"
-                style:transform="translateY({(scrollPos - initialPos - imgHeight / division) * - speed}px)"
+                style:transform="translateY({(scrollPos - initialPos - imgHeight / division + offset) * - speed}px)"
             />
         </div>
         <div class="bg-gradient" />

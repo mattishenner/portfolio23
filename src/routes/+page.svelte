@@ -1,5 +1,4 @@
 <script>
-    import Nav from '../components/Nav.svelte';
     import Hero from '../components/Hero.svelte';
     import PortfolioPiece from '../components/PortfolioPiece.svelte';
 
@@ -8,7 +7,6 @@
 
 <svelte:window bind:scrollY={scrollPos} />
 
-<Nav />
 <Hero />
 <PortfolioPiece {scrollPos} image="/img/port1.png" title="Website til Turnkey Design">
     <p slot="roles"> 
