@@ -1,6 +1,8 @@
 <script>
     import { onMount } from "svelte";
     import { afterUpdate } from "svelte";
+    import { goto } from '$app/navigation';
+
 
     // Props
     export let title = "Portfolio Piece";
@@ -19,9 +21,9 @@
     onMount(() => {
         handleResize();
         window.addEventListener("resize", handleResize);
-        window.setTimeout(() => {
-            handleResize();
-        }, 20);
+        // window.setTimeout(() => {
+        //     handleResize();
+        // }, 20);
 
         //Create a media query
         const mediaQuery = window.matchMedia("(max-width: 700px)");
@@ -54,10 +56,15 @@
         initialPos = imgElement.getBoundingClientRect().top + window.scrollY;
         imgHeight = imgElement.getBoundingClientRect().height;
     }
+
+    export let path = "/"
+    function goToPage() {
+        goto(path)
+    }
 </script>
 
 <article>
-    <div class="wrapper" style="background-color: {'#' + color};">
+    <div class="wrapper" style="background-color: {'#' + color};" on:click={goToPage(path)}>
         <div class="bg-img">
             <img
                 bind:this={imgElement}
@@ -96,6 +103,7 @@
         overflow: hidden;
         border-radius: var(--border-radius);
         background-color: var(--card-color);
+        cursor: pointer;
     }
     .bg-img {
         position: relative;

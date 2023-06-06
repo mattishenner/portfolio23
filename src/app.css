@@ -5,6 +5,7 @@
     --white: #F8F8F8;
     --card-color: #f2f2f2;
     --green: #BFC195;
+    --peach: #e8a98c;
     
     --margin: 38px;
     --nav-spacing: 26px;
@@ -31,6 +32,26 @@ h1 {
 }
 h2 {
     font-size: 2.5em;
+}
+
+a, a:visited{
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+a:hover{
+    color: var(--green);
+}
+
+button{
+    cursor: pointer;
+    font-size: .875em;
+    padding: 10px 20px;
+    background-color: var(--black);
+    border: none;
+    border-radius: calc(var(--border-radius) / 2);
+    color: var(--white);
 }
 
 @media only screen and (max-width: 768px) {

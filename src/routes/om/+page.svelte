@@ -1,13 +1,15 @@
 <script>
-    import HeroAbout from "../../components/HeroAbout.svelte";
+    import HeroGen from "../../components/HeroGen.svelte";
 </script>
 
 
-<HeroAbout />
+<HeroGen />
 
-<section class="top">
+
+
+<section class="cols">
     <img src="/img/portrait2.png" alt="portræt af Mattis">
-    <div>
+    <div class="p1">
         <h2>Her er lidt om mig hehe</h2>
         <p>
             Founded in 2015 by partners Nicolas Fuhr, creative director, and Julie Fuhr, identity designer, Fuhr Studio is a design and branding studio based in Denmark.
@@ -19,9 +21,7 @@
             With absolute commitment to change for the better, we wield that power.
         </p>
     </div>
-</section>
-
-<section class="cols">
+    <div class="spacer"></div>
     <div>
         <div class="line"></div>
     </div>
@@ -44,47 +44,37 @@
     h2{
         font-size: 1.5em;
         margin-top: 0;
+        margin-bottom: 1rem;
     }
     section{
         margin: 0 var(--margin);
     }
 
-    .top{
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: calc(var(--margin) * 2);
-        height: fit-content;
-        margin-bottom: 64px;
-        align-items: center;
+    .p1{
+        grid-column: span 3;
+        margin-top: auto;
+        margin-bottom: auto;
     }
-    .top img{
+
+    img{
         width: 100%;
-        border-radius: calc(var(--border-radius) * 2);
-
+        border-radius: calc(var(--border-radius) * 0.5);
+        min-width: 240px;
     }
 
-    .top div{
-        position: relative;
-        background-color: var(--white);
-        padding: 0 0 calc(var(--margin) / 2) calc(var(--margin) / 2);
-        border-radius: var(--border-radius);
-
+    .spacer{
+        height: 10px;
+        grid-column: span 4;
     }
-    .top div :last-child{
+/* 
+    .p1{
+        grid-column: span 3;
+        margin-top: auto;
+        margin-bottom: auto;
+    } */
+
+    .p1 :last-child{
         margin-bottom: 0;
-    }
-
-    .top div:after{
-        content: "";
-        display: block;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: var(--margin);
-        right: var(--margin);
-        background-color: var(--green);
-        z-index: -1;
-        border-radius: var(--border-radius);
     }
 
     .cols{
@@ -96,25 +86,26 @@
         margin-top: -6px;
     }
     .line{
-        border-top: var(--margin) solid var(--green);
+        border-top: 8px solid var(--green);
         margin-bottom: 20px;
         border-radius: var(--border-radius);
     }
 
     @media only screen and (max-width: 768px){
-        .top{
+        .container{
             display: flex;
             flex-direction: column-reverse;
-            margin-bottom: 30px;
+            align-items: start;
+            padding: 20px;
         }
-        .top div{
-            margin-left: var(--margin);
-        }
-        .top img{
+
+        .container img{
+            margin-top: 10px;
             width: 100%;
-            aspect-ratio: 3 / 2.25;
+            aspect-ratio: 3 / 2;
             object-fit: cover;
         }
+
         .cols{
             grid-template-columns: 1fr;
         }

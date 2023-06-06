@@ -8,7 +8,7 @@
 <svelte:window bind:scrollY={scrollPos} />
 
 <Hero />
-<PortfolioPiece {scrollPos} image="/img/port1.png" title="Website til Turnkey Design">
+<PortfolioPiece {scrollPos} image="/img/port1.png" title="Website til Turnkey Design" path="/om3">
     <p slot="roles"> 
         Udvikling <br>
         UI / UX

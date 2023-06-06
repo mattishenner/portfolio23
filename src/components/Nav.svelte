@@ -20,7 +20,7 @@
     }
 
     function toggleMenu() {
-        menuOpen = !menuOpen;
+        if (isMobile) menuOpen = !menuOpen;
     }
 </script>
 
@@ -29,8 +29,8 @@
 <nav>
     <a href="/" class="logo">Mattis Henner <span>Portfolio</span></a>
     <ul class={isMobile && menuOpen ? "open" : ""}>
-        <li><a href="/om">Om mig</a></li>
-        <li><a href="">Kontakt</a></li>
+        <li><a href="/om3" on:click={toggleMenu}>Om mig</a></li>
+        <li><a href="/kontakt2" on:click={toggleMenu}>Kontakt</a></li>
         <li>
             <ul class="nested">
                 <li><a href=""><img src="/img/github.svg" alt="" /></a></li>
@@ -39,15 +39,15 @@
             </ul>
         </li>
     </ul>
-    <div class="menu-icon" on:click={toggleMenu}>
+    <button class="menu-icon" on:click={toggleMenu}>
         <div class="placeholder">Menu</div>
         {#if menuOpen}
-            <div class="ghost" transition:fly="{{y: -20, duration: 200}}">Close</div>
+            <div class="ghost" transition:fly="{{y: -20, duration: 200}}">Luk</div>
         {:else}
             <div class="ghost" transition:fly="{{y: 20, duration: 200}}">Menu</div>
         {/if}
         
-    </div>
+    </button>
 </nav>
 
 <style>
@@ -57,9 +57,13 @@
     .ghost {
         position: absolute;
         top: 0;
-        left: 0%;
+        right: 0;
     }
     .menu-icon {
+        border-radius: 0;
+        border: none;
+        background-color: transparent;
+        font-size: 1em;
         display: none;
         position: relative;
     }
@@ -72,6 +76,10 @@
         position: sticky;
         top: 0;
         z-index: 900;
+    }
+
+    a {
+        font-weight: 500;
     }
 
     nav ul {
