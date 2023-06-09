@@ -6,6 +6,10 @@
     --card-color: #f2f2f2;
     --green: #BFC195;
     --peach: #e8a98c;
+    --red: #D68585;
+    --yellow: #fcf09f;
+    --violet: #d3bbdb;
+    --blue: #a1c3d3;
     
     --margin: 38px;
     --nav-spacing: 26px;
@@ -23,6 +27,20 @@ body{
     overflow-x: hidden;
 }
 
+.blog{
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 var(--margin);
+}
+.blog h1, .blog h2, .blog h3, .blog h4, .blog h5, .blog h6{
+    margin-bottom: 0;
+}
+.blog p{
+    margin-top: 5px;
+    line-height: 1.75;
+}
+
 h1, h2, h3, h4, h5, h6{
     font-weight: 500;
 }
@@ -32,6 +50,12 @@ h1 {
 }
 h2 {
     font-size: 2.5em;
+}
+h3 {
+    font-size: 1.75em;
+}
+h4 {
+    font-size: 1.5em;
 }
 
 a, a:visited{
